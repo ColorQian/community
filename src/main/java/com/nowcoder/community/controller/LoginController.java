@@ -139,4 +139,6 @@ public class LoginController implements CommunityConstant {
 
         return "redirect:/login";   //重定向默认get请求
     }
+
+
 }
