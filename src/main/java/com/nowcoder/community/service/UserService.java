@@ -162,4 +162,17 @@ public class UserService implements CommunityConstant {
     public void logout(String ticket) {
         loginTicketMapper.updateStatus(ticket, 1);
     }
+
+    //通过ticket查询LoginTicket对象
+    public LoginTicket getLoginTicket(String ticket) {
+        LoginTicket loginTicket = loginTicketMapper.selectByTicket(ticket);
+        return loginTicket;
+    }
+
+    //向用户发送一封带有验证码的邮件
+    public String sendVerifycode() {
+
+
+        return "";
+    }
 }

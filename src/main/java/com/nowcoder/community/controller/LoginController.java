@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
@@ -140,5 +137,19 @@ public class LoginController implements CommunityConstant {
         return "redirect:/login";   //重定向默认get请求
     }
 
+    @RequestMapping(path = "/forget", method = RequestMethod.GET)
+    public String getForgetPage() {
+        return "/site/forget";
+    }
 
+    @RequestMapping(path = "/getVerifycode", method = RequestMethod.GET)
+    @ResponseBody
+    public String getVerifycode(HttpSession session) {
+        String verifycode = userService.sendVerifycode();
+
+        //将发送到邮箱的verify存到session, 之后客服端填写verifycode之后，会提交给服务端，服务端进行比较
+        session.setAttribute("verifycode", verifycode);
+
+        return "test 获取验证码";
+    }
 }
