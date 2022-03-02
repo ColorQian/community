@@ -1,5 +1,6 @@
 package com.nowcoder.community;
 
+import com.nowcoder.community.util.CommunityUtil;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest
 @ContextConfiguration(classes = CommunityApplication.class)
 public class LoggerTest {
+
 
     private static final Logger logger = LoggerFactory.getLogger(LoggerTest.class);
 
@@ -20,6 +22,8 @@ public class LoggerTest {
         logger.info("info log");
         logger.warn("warn log");
         logger.error("error log");
+
+        System.out.println(CommunityUtil.md5("123" + "08044"));
 
     }
 }
