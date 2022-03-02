@@ -1,6 +1,6 @@
 package com.nowcoder.community;
 
-import com.nowcoder.community.util.CommunityUtil;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,6 @@ public class LoggerTest {
         logger.warn("warn log");
         logger.error("error log");
 
-        System.out.println(CommunityUtil.md5("123" + "08044"));
 
     }
 }
