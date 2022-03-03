@@ -4,6 +4,7 @@ import com.google.code.kaptcha.Producer;
 import com.nowcoder.community.entity.User;
 import com.nowcoder.community.service.UserService;
 import com.nowcoder.community.util.CommunityConstant;
+import com.nowcoder.community.util.CommunityUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,16 +141,5 @@ public class LoginController implements CommunityConstant {
     @RequestMapping(path = "/forget", method = RequestMethod.GET)
     public String getForgetPage() {
         return "/site/forget";
-    }
-
-    @RequestMapping(path = "/getVerifycode", method = RequestMethod.GET)
-    @ResponseBody
-    public String getVerifycode(HttpSession session) {
-        String verifycode = userService.sendVerifycode();
-
-        //将发送到邮箱的verify存到session, 之后客服端填写verifycode之后，会提交给服务端，服务端进行比较
-        session.setAttribute("verifycode", verifycode);
-
-        return "test 获取验证码";
     }
 }

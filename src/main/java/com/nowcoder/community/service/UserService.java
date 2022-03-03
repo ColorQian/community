@@ -169,13 +169,6 @@ public class UserService implements CommunityConstant {
         return loginTicket;
     }
 
-    //向用户发送一封带有验证码的邮件
-    public String sendVerifycode() {
-
-
-        return "";
-    }
-
     //通过userId 和 headerUrl修改用户头像
     public int updateHeader(int userId, String headerUrl) {
         return userMapper.updateHeader(userId, headerUrl);
