@@ -4,10 +4,10 @@
     $("#deleteBtn").click(setDelete);
 });*/
 
-function like(btn, entityType, entityId) {
+function like(btn, entityType, entityId, entityUserId) {
     $.post(
         CONTEXT_PATH + "/like",
-        {"entityType":entityType,"entityId":entityId},
+        {"entityType":entityType,"entityId":entityId,"entityUserId":entityUserId},
         function(data) {
             data = $.parseJSON(data);
             if(data.code == 0) {
