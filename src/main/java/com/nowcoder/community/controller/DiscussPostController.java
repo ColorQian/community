@@ -150,4 +150,29 @@ public class DiscussPostController implements CommunityConstant {
         model.addAttribute("comments", commentVoList);
         return "/site/discuss-detail";
     }
+
+    @RequestMapping(path = "/myPosts/{userId}", method = RequestMethod.GET)
+    public String getMyPosts(@PathVariable("userId") int userId, Page page, Model model) {
+        page.setLimit(5);
+        page.setPath("/discuss/myPosts/" + userId);
+        int myPostCount = discussPostService.findDiscussPostRows(userId);
+        page.setRows(myPostCount);
+
+        model.addAttribute("myPostCount", myPostCount);
+
+        List<DiscussPost> myPostList = discussPostService.findDiscussPostByUserId(userId, page.getOffset(), page.getLimit());
+
+        List<Map<String, Object>> myLists = new ArrayList<>();
+        if (myPostList != null) {
+            for (DiscussPost discussPost : myPostList) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("discussPost", discussPost);
+                long myPostLikeCount = likeService.findEntityLikeCount(ENTITY_TYPE_POST, discussPost.getId());
+                map.put("myPostLikeCount", myPostLikeCount);
+                myLists.add(map);
+            }
+        }
+        model.addAttribute("myLists", myLists);
+        return "/site/my-post";
+    }
 }
