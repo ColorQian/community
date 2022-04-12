@@ -6,6 +6,7 @@ import com.nowcoder.community.entity.Page;
 import com.nowcoder.community.entity.User;
 import com.nowcoder.community.service.CommentService;
 import com.nowcoder.community.service.DiscussPostService;
+import com.nowcoder.community.service.UserService;
 import com.nowcoder.community.util.HostHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class CommentController {
     @Resource
     private DiscussPostService discussPostService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(path = "/add/{discussPostId}", method = RequestMethod.POST)
     public String addComment(@PathVariable("discussPostId") int discussPostId, Comment comment) {
         User user = hostHolder.getUser();
@@ -43,6 +47,12 @@ public class CommentController {
 
     @RequestMapping(path = "/myReply/{userId}", method = RequestMethod.GET)
     public String getMyReply(@PathVariable("userId") int userId, Page page, Model model) {
+        User user = userService.findUserById(userId);
+        if (user == null) {
+            throw new RuntimeException("该用户不存在");
+        }
+        model.addAttribute("user", user);
+
         page.setPath("/comment/myReply/" + userId);
         page.setLimit(5);
         int myReplyCount = commentService.findCommentCountByUserId(userId);

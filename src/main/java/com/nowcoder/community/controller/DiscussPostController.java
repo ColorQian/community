@@ -153,6 +153,12 @@ public class DiscussPostController implements CommunityConstant {
 
     @RequestMapping(path = "/myPosts/{userId}", method = RequestMethod.GET)
     public String getMyPosts(@PathVariable("userId") int userId, Page page, Model model) {
+        User user = userService.findUserById(userId);
+        if (user == null) {
+            throw new RuntimeException("该用户不存在!");
+        }
+        model.addAttribute("user", user);
+
         page.setLimit(5);
         page.setPath("/discuss/myPosts/" + userId);
         int myPostCount = discussPostService.findDiscussPostRows(userId);
