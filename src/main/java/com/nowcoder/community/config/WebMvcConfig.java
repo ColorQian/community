@@ -18,8 +18,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private LoginTicketInterceptor loginTicketInterceptor;
 
-    @Autowired
-    private LoginRequiredInterceptor loginRequiredInterceptor;
+/*    @Autowired
+    private LoginRequiredInterceptor loginRequiredInterceptor;*/
 
     @Autowired
     private MessageInterceptor messageInterceptor;
@@ -33,8 +33,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginTicketInterceptor)  //例如：排除所有路径下的css文件(静态资源)
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
 
-        registry.addInterceptor(loginRequiredInterceptor)  //例如：排除所有路径下的css文件(静态资源)
-                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
+//        registry.addInterceptor(loginRequiredInterceptor)  //例如：排除所有路径下的css文件(静态资源)
+//               .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
 
         // 所有的静态资源 都 不拦截
         // 拦截所有的动态请求
